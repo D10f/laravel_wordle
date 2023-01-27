@@ -20,13 +20,17 @@ class Game {
      */
     handleWrite(key) {
         this._board.writeLetter(key, this.currentAttempt);
+        if (this.currentRow.every(tile => tile.status === TILE_STATE_ENUM.FILLED)) {
+            this.state = GAME_STATE_ENUM.WAIT;
+        }
     }
 
     /**
      * Attempts to delete the latest character in the current attempt.
      */
     handleDelete() {
-        this._board.deleteLetter(this.currentAttempt);
+        this.state = GAME_STATE_ENUM.ACTIVE;
+        return this._board.deleteLetter(this.currentAttempt);
     }
 
     /**
@@ -34,10 +38,6 @@ class Game {
      */
     handleSubmit() {
         const guess = this.currentGuess;
-
-        if (guess.length < this._wordLength) {
-            return 'You must provide a guess for every character.';
-        }
 
         if (guess !== this._targetWord) {
             this.evaluateGuess();
@@ -48,6 +48,7 @@ class Game {
                 return 'You lost!';
             }
 
+            this.state = GAME_STATE_ENUM.ACTIVE;
             return `Try again! You still have ${this.attemptsLeft} attempts`;
         }
 
@@ -81,14 +82,6 @@ class Game {
 
             targetWordFrequencyMap.decrease(tile.letter);
             tile.update({ status: TILE_STATE_ENUM.CORRECT });
-
-            // Update the same tile in next row
-            if (isPerfectMatch && this.attemptsLeft > 1) {
-                this._board.getTileAt(this.currentAttempt + 1, idx).update({
-                    letter: tile.letter,
-                    status: TILE_STATE_ENUM.CORRECT
-                });
-            }
         });
 
         partialMatches.forEach((tile) => {
@@ -102,6 +95,14 @@ class Game {
                 });
             }
         });
+    }
+
+    /**
+     * Retrieves a row of tiles at the provided index.
+     * @param {number} row the row index.
+     */
+    getRowAt(rowIdx) {
+        return this._board.board[rowIdx];
     }
 
     /**

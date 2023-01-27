@@ -1,4 +1,4 @@
-export const MAX_ATTEMPTS = 3;
+export const MAX_ATTEMPTS = 5;
 export const WORD_LENGTH = 5;
 
 export const GAME_STATE_ENUM = {
@@ -15,4 +15,11 @@ export const TILE_STATE_ENUM = {
     CORRECT: 'CORRECT',
     PARTIAL: 'PARTIAL',
     WRONG: 'WRONG',
+};
+
+export const KEY_STATE_ENUM = {
+    EMPTY: 'EMPTY',
+    FILLED: 'FILLED',
+    CORRECT: 'CORRECT',
+    PARTIAL: 'PARTIAL',
 };

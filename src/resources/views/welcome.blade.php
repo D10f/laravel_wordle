@@ -14,15 +14,30 @@
         x-data="game"
         @keyup.window="onKeyPress($event.key)"
     >
-        <template x-for="(row, idx) in game.board">
-            <div :class="game.currentAttempt === idx ? 'row active' : 'row'">
-                <template x-for="tile in row">
-                    <div class="tile" :class="tile.status.toLowerCase()" x-text="tile.letter"></div>
-                </template>
-            </div>
-        </template>
+        <div class="board">
+            <template x-for="(row, idx) in game.board">
+                <div :class="game.currentAttempt === idx ? 'board__row board__row--active' : 'board__row'">
+                    <template x-for="tile in row">
+                        <div class="board__tile" :class="tile.status.toLowerCase()" x-text="tile.letter"></div>
+                    </template>
+                </div>
+            </template>
+        </div>
 
         <output x-text="message"></output>
+
+        <section
+            class="keyboard"
+            @click.stop="onKeyPress($event.target.textContent)"
+        >
+            <template x-for="(row, idx) in keyboard.keys">
+                <div class="keyboard__row" >
+                    <template x-for="key in row">
+                        <div class="keyboard__key" :class="key.status.toLowerCase()" x-text="key.letter"></div>
+                    </template>
+                </template>
+            </section>
+        </section>
     </main>
 </body>
 </html>

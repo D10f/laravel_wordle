@@ -46,17 +46,19 @@ class Board {
     /**
      * Attempts to delete the letter from the last tile in the row.
      * @param {number} rowIdx the current active row.
+     * @return {string} the letter that was deleted.
      */
     deleteLetter(rowIdx) {
         const row = this.board[rowIdx];
         for (let i = this.cols - 1; i >= 0; i--) {
             const tile = row[i];
             if (tile.status === TILE_STATE_ENUM.FILLED) {
+                const deletedLetter = tile.letter;
                 tile.update({
                     letter: '',
                     status: TILE_STATE_ENUM.EMPTY
                 });
-                break;
+                return deletedLetter;
             }
         }
     }
