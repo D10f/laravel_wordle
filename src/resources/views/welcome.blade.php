@@ -28,12 +28,17 @@
 
         <section
             class="keyboard"
-            @click.stop="onKeyPress($event.target.textContent)"
+            @click.stop="onKeyPress($event.target.dataset.key)"
         >
             <template x-for="(row, idx) in keyboard.keys">
                 <div class="keyboard__row" >
                     <template x-for="key in row">
-                        <div class="keyboard__key" :class="key.status.toLowerCase()" x-text="key.letter"></div>
+                        <div
+                            class="keyboard__key"
+                            :class="key.status.toLowerCase()"
+                            :data-key="key.letter"
+                            x-text="key.letter"
+                        ></div>
                     </template>
                 </template>
             </section>

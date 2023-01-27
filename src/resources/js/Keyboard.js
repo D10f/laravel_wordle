@@ -27,14 +27,6 @@ class Keyboard {
     handleDelete(targetKey) {
         const key = this._getKey(targetKey);
         key.status = KEY_STATE_ENUM.EMPTY;
-        /*
-        if (
-            key.status !== KEY_STATE_ENUM.PARTIAL &&
-            key.status !== KEY_STATE_ENUM.CORRECT
-        ) {
-            key.status = KEY_STATE_ENUM.EMPTY;
-        }
-        */
     }
 
     /**
@@ -45,14 +37,6 @@ class Keyboard {
     handleWrite(targetKey) {
         const key = this._getKey(targetKey);
         key.status = KEY_STATE_ENUM.EMPTY;
-        /*
-        if (
-            key.status !== KEY_STATE_ENUM.PARTIAL &&
-            key.status !== KEY_STATE_ENUM.CORRECT
-        ) {
-            key.status = KEY_STATE_ENUM.FILLED;
-        }
-        */
     }
 
     /**
