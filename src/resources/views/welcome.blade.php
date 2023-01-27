@@ -24,7 +24,7 @@
             </template>
         </div>
 
-        <output x-text="message"></output>
+        <output class="message" :class="game.isGameOver ? 'message--large' : ''" x-text="message"></output>
 
         <section
             class="keyboard"

@@ -43,7 +43,7 @@ class Game {
             this.evaluateGuess();
             this.currentAttempt++;
 
-            if (this.gameOver) {
+            if (this.hasAttemptsLeft) {
                 this.state = GAME_STATE_ENUM.DEFEATED;
                 return 'You lost!';
             }
@@ -136,8 +136,15 @@ class Game {
     /**
      * Returns true if the user has consumed all attempts at guessing the word.
      */
-    get gameOver() {
+    get hasAttemptsLeft() {
         return this.currentAttempt === this._maxAttmepts;
+    }
+
+    /**
+     * Returns true if the game state is in one of 'defeated' or 'completed' states.
+     */
+    get isGameOver() {
+        return this.state === GAME_STATE_ENUM.DEFEATED || this.state === GAME_STATE_ENUM.COMPLETED;
     }
 }
 
