@@ -9,9 +9,27 @@ class Game {
         this._wordLength = wordLength;
         this.currentAttempt = 0;
         this._board = new Board(maxAttempts, wordLength);
-        // this._targetWord = this.pickRandomWord(wordLength);
-        this._targetWord = 'pizza';
+        this._dict = null;
+        this._lang = 'es';
+        this._targetWord = '';
         this.state = GAME_STATE_ENUM.ACTIVE;
+        this._pickRandomWord();
+    }
+
+    async _getDictionary() {
+        const res = await fetch(`/api/dict?wordLength=${this._wordLength}&lang=${this._lang}`);
+        const file = await res.json();
+        return file;
+    }
+
+    async _pickRandomWord() {
+        if (!this._dict) {
+            this._dict = await this._getDictionary();
+        }
+
+        const filteredDict = this._dict.filter(word => word.length === this._wordLength);
+        const idx = Math.floor(Math.random() * filteredDict.length) + 1;
+        this._targetWord = filteredDict[idx].toLowerCase();
     }
 
     /**
