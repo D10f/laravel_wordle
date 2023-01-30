@@ -47,8 +47,8 @@ body {
     justify-content: center;
     align-items: center;
     margin: 0.2rem 0.2rem;
-    width: 7rem;
-    height: 7rem;
+    width: 5rem;
+    height: 5rem;
     outline: 1px solid var(--ctp-frappe-surface0);
     background-color: var(--ctp-frappe-base);
     font-size: 3rem;
@@ -112,9 +112,15 @@ body {
     justify-content: center;
     align-items: center;
     min-width: 2rem;
+    height: 2rem;
+    padding: 0.2rem;
+    margin: 0.1rem;
+    /*
+    min-width: 2rem;
     height: 2em;
     padding: 1rem;
     margin: 0.1rem;
+    */
     border-radius: 3px;
     text-transform: uppercase;
 }
@@ -131,4 +137,18 @@ body {
 
 .keyboard__key.partial {
     background-color: var(--ctp-frappe-yellow);
+}
+
+@media screen and (min-width: 600px) {
+    .board__tile {
+        width: 7rem;
+        height: 7rem;
+    }
+
+    .keyboard__key {
+        min-width: 2rem;
+        height: 2em;
+        padding: 1rem;
+        margin: 0.1rem;
+    }
 }
