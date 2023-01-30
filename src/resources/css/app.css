@@ -141,6 +141,20 @@ body {
 
 @media screen and (min-width: 600px) {
     .board__tile {
+        width: 6rem;
+        height: 6rem;
+    }
+
+    .keyboard__key {
+        min-width: 1.5rem;
+        height: 1.5rem;
+        padding: 0.75rem;
+        margin: 0.1rem;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .board__tile {
         width: 7rem;
         height: 7rem;
     }
